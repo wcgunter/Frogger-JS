@@ -1,15 +1,22 @@
 .grid{
     border: 1px solid black;
-    height: 540px;
-    width: 540px;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
+    height: calc(100vh - 18px); /* (100vh = 100% of the view height) - (18 px for body padding) = the height fills the screen*/
+}
+
+.grid .row {
+    display: flex;
+    flex-direction: row;
+    width: calc(100%); /* each row fills 100% of the available width */
+    height: calc(10%); /* each row fills 10% of the available height because there are 10 rows */
 }
 
 /* Every div inside the grid will have the following css properties */
 .grid div{
-    height: 60px; /* nine divs fit in each row: 540/9 = 60, so height = width = 60 px */
-    width : 60px;
+    height: calc(100%); /* each block takes up 100% of the available height */
+    width : calc(10%); /* each block takes up 10% of the available width because there are 10 blocks in a row */
 }
 
 .ending-block{
