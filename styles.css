@@ -1,0 +1,35 @@
+.grid{
+    border: 1px solid black;
+    height: 540px;
+    width: 540px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Every div inside the grid will have the following css properties */
+.grid div{
+    height: 60px; /* nine divs fit in each row: 540/9 = 60, so height = width = 60 px */
+    width : 60px;
+}
+
+.ending-block{
+    background-color: red;
+}
+
+.starting-block{
+    background-color: blue;
+}
+
+.log-left,
+.log-right{
+    background-color: lightblue;
+}
+
+.car-left,
+.car-right{
+    background-color: gray;
+}
+
+.frog{
+    background-color: green;
+}

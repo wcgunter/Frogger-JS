@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frogger</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- The board is a grid of 9X9 dimension, i.e., 81 squares -->
+    <!-- We can change it later, if we want. -->
+
+    <!-- I am drawing the board in this file, instead of using a loop in the javascript file, b/c each 
+    div element will have a different class, some will be logs, some will be cars.  -->
+
+    <!-- wrapping grid, which will be our game board-->
+    <div class="grid">
+        <!-- Row 9 of grid -->
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div class = "ending-block"></div>  <!-- this is the goal state block -->
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+
+        <!-- Row 8 of grid -->
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+
+        <!-- Row 7 of grid -->
+        <div class="log-left"></div> <!-- This is the row of logs going left-->
+        <div class="log-left"></div>
+        <div class="log-left"></div>
+        <div class="log-left"></div>
+        <div class="log-left"></div>
+        <div class="log-left"></div>
+        <div class="log-left"></div>
+        <div class="log-left"></div>
+        <div class="log-left"></div>
+
+        <!-- Row 6 of grid -->
+        <div class="log-right"></div> <!-- This is the row of logs going right-->
+        <div class="log-right"></div>
+        <div class="log-right"></div>
+        <div class="log-right"></div>
+        <div class="log-right"></div>
+        <div class="log-right"></div>
+        <div class="log-right"></div>
+        <div class="log-right"></div>
+        <div class="log-right"></div>
+
+        <!-- Row 5 of grid -->
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+
+        <!-- Row 4 of grid -->
+        <div class="car-left"></div> <!-- This is the row of cars going left-->
+        <div class="car-left"></div>
+        <div class="car-left"></div>
+        <div class="car-left"></div>
+        <div class="car-left"></div>
+        <div class="car-left"></div>
+        <div class="car-left"></div>
+        <div class="car-left"></div>
+        <div class="car-left"></div>
+
+        <!-- Row 3 of grid -->
+        <div class="car-right"></div> <!-- This is the cars of logs going right-->
+        <div class="car-right"></div>
+        <div class="car-right"></div>
+        <div class="car-right"></div>
+        <div class="car-right"></div>
+        <div class="car-right"></div>
+        <div class="car-right"></div>
+        <div class="car-right"></div>
+        <div class="car-right"></div>
+
+        <!-- Row 2 of grid-->
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+
+        <!-- Row 1 of grid-->
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div class="starting-block"></div> <!--This is the starting point of the frog-->
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+</body>
+<script src='script.js'></script>
+</html>
