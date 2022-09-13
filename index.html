@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- The board is a grid of 9X9 dimension, i.e., 81 squares -->
+    <!-- The board is a grid of 10X10 dimension, i.e., 100 squares -->
     <!-- We can change it later, if we want. -->
 
     <!-- I am drawing the board in this file, instead of using a loop in the javascript file, b/c each 
@@ -17,6 +17,8 @@
     <!-- wrapping grid, which will be our game board-->
     <div class="grid">
 
+        <!-- wrapping grid elements for each row in their own row div -->
+        <!-- rows start at 1 and go to 10 because querySelectorAll lists elements in this order -->
         <div class="row" id="row-1">
             <div></div>
             <div></div>

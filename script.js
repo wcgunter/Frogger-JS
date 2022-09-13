@@ -1,5 +1,7 @@
 // Game constants and variables
+// select all the rows - 10 rows - each row has 10 children (10 columns)
 let divRowsInGrid = document.querySelectorAll('.grid .row');
+// frog start position
 let currentColumn = 6;
 let currentRow = 10;
 const gameOverSound = new Audio('assets/audio_dead.mp3');
