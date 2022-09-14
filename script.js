@@ -59,7 +59,7 @@ let board = [
         objects: [] 
     }];
 
-for (let i = 0; i < divRowsInGrid; i++){
+for (let i = 0; i < divRowsInGrid.length; i++){
     divRowsInGrid[i].classList.add(board[i].environment);
 }
 
