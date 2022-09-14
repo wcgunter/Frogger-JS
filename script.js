@@ -7,6 +7,61 @@ let currentRow = 10;
 const gameOverSound = new Audio('assets/audio_dead.mp3');
 const moveSound = new Audio("assets/audio_move.mp3");
 
+let board = [
+    {
+        row: 1, 
+        environment: 'grass', 
+        objects: [] 
+    },
+    { 
+        row: 2, 
+        environment: 'river', 
+        objects: [{ start: 0, end: 0, image: "url"}, { start: 3, end: 3, image: "url"}] 
+    },
+    { 
+        row: 3, 
+        environment: 'river', 
+        objects: [] 
+    },
+    { 
+        row: 4, 
+        environment: 'river', 
+        objects: [] 
+    },
+    { 
+        row: 5, 
+        environment: 'grass', 
+        objects: [] 
+    },
+    { 
+        row: 6, 
+        environment: 'road', 
+        objects: [] 
+    },
+    { 
+        row: 7, 
+        environment: 'road', 
+        objects: [] 
+    },
+    { 
+        row: 8, 
+        environment: 'road', 
+        objects: [] 
+    },
+    { 
+        row: 9, 
+        environment: 'grass', 
+        objects: [] 
+    },
+    { 
+        row: 10, 
+        environment: 'grass', 
+        objects: [] 
+    }];
+
+for (let i = 0; i < divRowsInGrid; i++){
+    divRowsInGrid[i].classList.add(board[i].environment);
+}
 
 function moveFrog(e){
     moveSound.play();
