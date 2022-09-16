@@ -21,7 +21,21 @@ const moveSound = new Audio("assets/audio_move.mp3");
 var welcomeModal = document.getElementById("welcomeModal");
 
 function startGame(){
-    welcomeModal.style.display = "none";
+    if (welcomeModal.classList.contains('hidden')) {
+        welcomeModal.classList.remove('hidden');
+        setTimeout(function () {
+            welcomeModal.classList.remove('visually_hidden');
+        }, 20);
+      } else {
+        welcomeModal.classList.add('visually_hidden');    
+        welcomeModal.addEventListener('transitionend', function(e) {
+            welcomeModal.classList.add('hidden');
+        }, {
+          capture: false,
+          once: true,
+          passive: false
+        });
+      }
 }
 
 let board = [
