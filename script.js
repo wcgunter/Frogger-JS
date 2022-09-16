@@ -16,6 +16,14 @@ let currentRow = 10;
 const gameOverSound = new Audio('assets/audio_dead.mp3');
 const moveSound = new Audio("assets/audio_move.mp3");
 
+//~~~~~~~~~~~~~~~~~~~MODAL HANDLING~~~~~~~~~~~~~~~~~~~
+//Get the modal objects
+var welcomeModal = document.getElementById("welcomeModal");
+
+function startGame(){
+    welcomeModal.style.display = "none";
+}
+
 let board = [
     {
         row: 0, 

@@ -78,3 +78,65 @@
 .grass {
     background-color: lightgreen
 }
+
+/* Modal background box */
+.modal {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    transition: all 1s;
+}
+/* Modal content box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 30px 30px 70px;
+    width: 50%;
+    text-align: center;
+    border-radius: 20px;
+    font-family: "Roboto", sans-serif;
+}
+
+button.startGame {
+    background-color: #ed6755;
+    border: none;
+    border-radius: 5px;
+    width: 200px;
+    padding: 14px;
+    font-size: 16px;
+    color: white;
+    box-shadow: 0px 6px 18px -5px rgba(237, 103, 85, 1);
+}
+
+.startGame:hover,
+.startGame:focus {
+    background-color: #e74c3c;
+    cursor: pointer;
+    box-shadow: 5px 10px 18px -3px rgba(237, 103, 85, 1);
+}
+
+.modal-title {
+    font-size: 30px;
+    font-weight: 500;
+    font-family: "Roboto", sans-serif;
+}
+
+.frogger-title {
+    font-size: 50px;
+    font-weight: 500;
+    font-family: 'Nabla', cursive;
+    margin-top: -30px;
+}
+
+.modal-text {
+    font-size: 15px;
+    font-weight: 400;
+    font-family: "Roboto", sans-serif;
+}
