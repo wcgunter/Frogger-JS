@@ -41,6 +41,7 @@
     background-color: green;
 }
 
+/*
 .l1, .l2, .l3{
     background-color: brown;
 }
@@ -55,4 +56,25 @@
 
 .c2, .c3, .c4 {
     background-color: lightgray;
+}
+*/
+
+.car {
+    background-color: blueviolet;
+}
+
+.log {
+    background-color: brown;
+}
+
+.road {
+    background-color: grey
+}
+
+.river {
+    background-color: lightblue
+}
+
+.grass {
+    background-color: lightgreen
 }
