@@ -2,6 +2,8 @@
 Game constants and variables
 select all the rows - 10 rows - each row has 10 children (10 columns)
 */
+const COLUMNS = 10;
+const ROWS = 10;
 
 let squares = document.querySelectorAll('.grid .row');
 let logsMovingLeft = document.querySelectorAll('.log-left');
@@ -229,10 +231,10 @@ function moveCars(){
             if (board[i].objects.length >= 1){
                 for(var j = 0; j < board[i].objects.length; j++){
                     // remove the car from the current square
-                    squares[board[i].row].children[(board[i].objects[j].column + 10 ) % 10].classList.remove('car');
-                    board[i].objects[j].column += (1 * board[i].objects[j].direction + 10) % 10;
+                    squares[board[i].row].children[(board[i].objects[j].column + COLUMNS ) % COLUMNS].classList.remove('car');
+                    board[i].objects[j].column += (1 * board[i].objects[j].direction + COLUMNS) % COLUMNS;
                     // add the car to the next square
-                    squares[board[i].row].children[(board[i].objects[j].column + 10 ) % 10].classList.add('car');
+                    squares[board[i].row].children[(board[i].objects[j].column + COLUMNS ) % COLUMNS].classList.add('car');
                 }
             }
         }
@@ -246,14 +248,14 @@ function moveLogs(){
             if (board[i].objects.length >= 1){
                 for(var j = 0; j < board[i].objects.length; j++){
                     // remove the log from the current square (log is 2 squares wide)
-                    squares[board[i].row].children[board[i].objects[j].column % 10].classList.remove('log');
-                    squares[board[i].row].children[(board[i].objects[j].column + 1) % 10].classList.remove('log');
-                    //squares[board[i].row].children[(board[i].objects[j].column + 2) % 10].classList.remove('log');
-                    board[i].objects[j].column += (1 * board[i].objects[j].direction + 10) % 10;
+                    squares[board[i].row].children[board[i].objects[j].column % COLUMNS].classList.remove('log');
+                    squares[board[i].row].children[(board[i].objects[j].column + 1) % COLUMNS].classList.remove('log');
+                    //squares[board[i].row].children[(board[i].objects[j].column + 2) % COLUMNS].classList.remove('log');
+                    board[i].objects[j].column += (1 * board[i].objects[j].direction + COLUMNS) % COLUMNS;
                     // add log to next square (log is 2 squares wide)
-                    squares[board[i].row].children[(board[i].objects[j].column + 10 ) % 10].classList.add('log');
-                    squares[board[i].row].children[(board[i].objects[j].column + 10 + 1) % 10].classList.add('log');
-                    //squares[board[i].row].children[(board[i].objects[j].column + 10 + 2) % 10].classList.add('log');
+                    squares[board[i].row].children[(board[i].objects[j].column + COLUMNS ) % COLUMNS].classList.add('log');
+                    squares[board[i].row].children[(board[i].objects[j].column + COLUMNS + 1) % COLUMNS].classList.add('log');
+                    //squares[board[i].row].children[(board[i].objects[j].column + COLUMNS + 2) % COLUMNS].classList.add('log');
                 }
             }
         }
