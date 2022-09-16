@@ -228,8 +228,10 @@ function moveCars(){
         if(board[i].environment == 'road'){
             if (board[i].objects.length >= 1){
                 for(var j = 0; j < board[i].objects.length; j++){
+                    // remove the car from the current square
                     squares[board[i].row].children[(board[i].objects[j].column + 10 ) % 10].classList.remove('car');
                     board[i].objects[j].column += (1 * board[i].objects[j].direction + 10) % 10;
+                    // add the car to the next square
                     squares[board[i].row].children[(board[i].objects[j].column + 10 ) % 10].classList.add('car');
                 }
             }
@@ -243,10 +245,12 @@ function moveLogs(){
         if(board[i].environment == 'river'){
             if (board[i].objects.length >= 1){
                 for(var j = 0; j < board[i].objects.length; j++){
+                    // remove the log from the current square (log is 2 squares wide)
                     squares[board[i].row].children[board[i].objects[j].column % 10].classList.remove('log');
                     squares[board[i].row].children[(board[i].objects[j].column + 1) % 10].classList.remove('log');
                     //squares[board[i].row].children[(board[i].objects[j].column + 2) % 10].classList.remove('log');
                     board[i].objects[j].column += (1 * board[i].objects[j].direction + 10) % 10;
+                    // add log to next square (log is 2 squares wide)
                     squares[board[i].row].children[(board[i].objects[j].column + 10 ) % 10].classList.add('log');
                     squares[board[i].row].children[(board[i].objects[j].column + 10 + 1) % 10].classList.add('log');
                     //squares[board[i].row].children[(board[i].objects[j].column + 10 + 2) % 10].classList.add('log');
