@@ -20,11 +20,15 @@
 }
 
 .ending-block{
-    background-color: red;
+    background-image: url("assets/labels/goal_label.png");
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .starting-block{
-    background-color: blue;
+    background-image: url("assets/labels/start_label.png");
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 /* .log-left,
@@ -60,22 +64,31 @@
 */
 
 .car {
-    background-color: blueviolet;
+    background-image: url("assets/obstacles/car.png");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .log {
-    background-color: brown;
+    background-image: url("assets/obstacles/log.png");
+    background-size: contain;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .road {
-    background-color: grey
+    background-color: grey;
+    background-image: url("assets/tiles/stone.jpg");
 }
 
 .river {
-    background-color: lightblue
+    background-color: lightblue;
+    background-image: url("assets/tiles/water.gif");
+    background-size: contain;
 }
 
 .grass {
+    background-image: url("assets/tiles/grass.jpg");
     background-color: lightgreen
 }
 

@@ -104,20 +104,28 @@ function moveFrog(e){
     squares[currentRow-1].children[currentColumn-1].classList.remove('frog');
     switch(e.key){
         case 'ArrowLeft':
-            console.log('ArrowLeft');
-            currentColumn -= 1;
+            if(currentColumn != 1) {
+                console.log('ArrowLeft');
+                currentColumn -= 1;
+            }
             break;
         case 'ArrowRight':
-            console.log('ArrowRight');
-            currentColumn += 1;
+            if(currentColumn != 10) {
+                console.log('ArrowRight');
+                currentColumn += 1;
+            }
             break;
         case 'ArrowUp':
-            console.log('ArrowUp');
-            currentRow -= 1;
+            if(currentRow != 1) {
+                console.log('ArrowUp');
+                currentRow -= 1;
+            }
             break;
         case 'ArrowDown':
-            console.log('ArrowDown');
-            currentRow += 1;
+            if(currentRow != 10) {
+                console.log('ArrowDown');
+                currentRow += 1;
+            }
             break;  
     }
     squares[currentRow-1].children[currentColumn-1].classList.add('frog');
