@@ -42,7 +42,14 @@
 } */
 
 .frog{
-    background-color: green;
+    background-image: url("assets/tiles/frog.png");
+    background-size: contain !important;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.frog.log{
+    background-image: url("assets/tiles/frog.png"), url("assets/obstacles/log.png");
 }
 
 /*
@@ -82,7 +89,6 @@
 }
 
 .river {
-    background-color: lightblue;
     background-image: url("assets/tiles/water.gif");
     background-size: contain;
 }
