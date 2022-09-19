@@ -99,6 +99,17 @@ for (let i = 0; i < squares.length; i++){
     squares[i].classList.add(board[i].environment);
 }
 
+function checkSpace(){
+    if (squares[currentRow-1].children[currentColumn-1].classList.contains('car')){
+        clearInterval(logInterval)
+        clearInterval(carInterval)
+    }
+    if (!squares[currentRow-1].children[currentColumn-1].classList.contains('log') && squares[currentRow-1].classList.contains('river')){
+        clearInterval(logInterval)
+        clearInterval(carInterval)
+    }
+}
+
 function moveFrog(e){
     moveSound.play();
     squares[currentRow-1].children[currentColumn-1].classList.remove('frog');
@@ -129,6 +140,7 @@ function moveFrog(e){
             break;  
     }
     squares[currentRow-1].children[currentColumn-1].classList.add('frog');
+    checkSpace();
 }
 
 document.addEventListener('keydown', moveFrog)
@@ -142,7 +154,6 @@ function moveCars(){
 function moveLogs(){
     moveObjects('river');
 }
-
 // move all objects that are in the environment specified
 // this function works by removing the class of the object type (e.g. car, log)
 // increases the column number of the object (or decreases if moving left)
@@ -202,6 +213,7 @@ function moveObjects(environment){
             }
         }
     }
+    checkSpace();
 }
 
 // the following functions add/remove the className string
@@ -223,5 +235,5 @@ We want to keep the logs and cars moving continously,
 to do that we use setInterval(), which calls moveLogs 
 function every 1 second or 1000ms and moveCars every 600ms.
 */
-setInterval(moveLogs, 1000);
-setInterval(moveCars, 600);
+const logInterval = setInterval(moveLogs, 1000);
+const carInterval = setInterval(moveCars, 600);
