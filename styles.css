@@ -69,6 +69,9 @@
     background-color: lightgray;
 }
 */
+.left {
+    transform: scaleX(-1);
+}
 
 .car {
     background-image: url("assets/obstacles/car.png");
