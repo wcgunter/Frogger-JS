@@ -148,6 +148,28 @@ function moveLogs(){
 // increases the column number of the object (or decreases if moving left)
 // and adds the object type to the class list of the div with the newly advanced column number
 function moveObjects(environment){
+
+    //This will move the frog appropriately when it is on a log and the update log function is called.
+    //Cannot go inside of the main for loop since it would be called for each log tile on the screen.
+    if(environment == "river") {
+        let frogLogSpace = document.getElementsByClassName("frog log");
+        
+        //If there is a div that has both the frog and log classes
+        if(frogLogSpace.length != 0) {
+
+            squares[currentRow-1].children[currentColumn-1].classList.remove('frog');
+
+            if (board[currentRow-1].objects[0].direction < 0 && currentColumn != 1) {
+                currentColumn -= 1;
+            } else if (board[currentRow-1].objects[0].direction > 0 && currentColumn != 10) {
+                currentColumn += 1;
+            }
+
+            squares[currentRow-1].children[currentColumn-1].classList.add('frog');
+
+        }
+    }
+
     for (var i = 0; i < board.length; i++){
         if(board[i].environment == environment){
             if (board[i].objects.length >= 1){
