@@ -16,6 +16,9 @@ let carsMovingRight = document.querySelectorAll(".car-right");
 let currentColumn = 6;
 let currentRow = 10;
 
+// Disables user input when win modal is visible
+let freezeUserInput = false;
+
 const gameOverSound = new Audio('assets/audio_dead.mp3');
 const moveSound = new Audio("assets/audio_move.mp3");
 
@@ -28,6 +31,7 @@ var gameWinModal = document.getElementById("gameWinModal");
 //functions that checks if the div with element "endBlock" has the class "frog"
 function checkGameWin(){
     if(endSquare.classList.contains("frog")){
+        freezeUserInput = true;
         if (gameWinModal.style.opacity == "1") {
             gameWinModal.style.opacity = "0";
         }
@@ -52,7 +56,11 @@ function restartGame(int) {
     } else if (int == 2) {
         gameWinModal.style.opacity = "0";
         gameWinModal.style.visibility = "hidden";
+        squares[currentRow-1].children[currentColumn-1].classList.remove('frog');
+        currentColumn = 6;
+        currentRow = 10;
     }
+    freezeUserInput = false;
 }
 
 let board = [
@@ -126,37 +134,39 @@ function checkSpace(){
 }
 
 function moveFrog(e){
-    moveSound.play();
-    squares[currentRow-1].children[currentColumn-1].classList.remove('frog');
-    switch(e.key){
-        case 'ArrowLeft':
-            if(currentColumn != 1) {
-                console.log('ArrowLeft');
-                currentColumn -= 1;
-            }
-            break;
-        case 'ArrowRight':
-            if(currentColumn != 10) {
-                console.log('ArrowRight');
-                currentColumn += 1;
-            }
-            break;
-        case 'ArrowUp':
-            if(currentRow != 1) {
-                console.log('ArrowUp');
-                currentRow -= 1;
-            }
-            break;
-        case 'ArrowDown':
-            if(currentRow != 10) {
-                console.log('ArrowDown');
-                currentRow += 1;
-            }
-            break;  
+    if(!freezeUserInput){
+        moveSound.play();
+        squares[currentRow-1].children[currentColumn-1].classList.remove('frog');
+        switch(e.key){
+            case 'ArrowLeft':
+                if(currentColumn != 1) {
+                    console.log('ArrowLeft');
+                    currentColumn -= 1;
+                }
+                break;
+            case 'ArrowRight':
+                if(currentColumn != 10) {
+                    console.log('ArrowRight');
+                    currentColumn += 1;
+                }
+                break;
+            case 'ArrowUp':
+                if(currentRow != 1) {
+                    console.log('ArrowUp');
+                    currentRow -= 1;
+                }
+                break;
+            case 'ArrowDown':
+                if(currentRow != 10) {
+                    console.log('ArrowDown');
+                    currentRow += 1;
+                }
+                break;  
+        }
+        squares[currentRow-1].children[currentColumn-1].classList.add('frog');
+        checkGameWin();
+        checkSpace();
     }
-    squares[currentRow-1].children[currentColumn-1].classList.add('frog');
-    checkGameWin();
-    checkSpace();
 }
 
 document.addEventListener('keydown', moveFrog)

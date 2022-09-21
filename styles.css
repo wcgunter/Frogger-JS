@@ -89,6 +89,7 @@
 .road {
     background-color: grey;
     background-image: url("assets/tiles/stone.jpg");
+    background-size: calc(10%);
 }
 
 .river {
@@ -98,7 +99,8 @@
 
 .grass {
     background-image: url("assets/tiles/grass.jpg");
-    background-color: lightgreen
+    background-color: lightgreen;
+    background-size: calc(10%);
 }
 
 /* Modal background box */
