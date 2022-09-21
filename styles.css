@@ -75,14 +75,16 @@
 
 .car {
     background-image: url("assets/obstacles/car.png");
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
+    /* object-fit: contain; */
+
 }
 
 .log {
     background-image: url("assets/obstacles/log.png");
     background-size: contain;
-    background-size: cover;
+    /* background-size: cover; */
     background-repeat: no-repeat;
 }
 
