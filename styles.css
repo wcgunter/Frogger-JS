@@ -1,34 +1,42 @@
-.grid{
+.grid {
     overflow: hidden;
     border: 1px solid black;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    height: calc(100vh - 18px); /* (100vh = 100% of the view height) - (18 px for body padding) = the height fills the screen*/
+    height: calc(100vh - 18px);
+    /* (100vh = 100% of the view height) - (18 px for body padding) = the height fills the screen*/
 }
 
 .grid .row {
     display: flex;
     flex-direction: row;
-    width: calc(100%); /* each row fills 100% of the available width */
-    height: calc(10%); /* each row fills 10% of the available height because there are 10 rows */
+    width: calc(100%);
+    /* each row fills 100% of the available width */
+    height: calc(10%);
+    /* each row fills 10% of the available height because there are 10 rows */
 }
 
 /* Every div inside the grid will have the following css properties */
-.grid div{
-    height: calc(100%); /* each block takes up 100% of the available height */
-    width : calc(10%); /* each block takes up 10% of the available width because there are 10 blocks in a row */
+.grid div {
+    height: calc(100%);
+    /* each block takes up 100% of the available height */
+    width: calc(10%);
+    /* each block takes up 10% of the available width because there are 10 blocks in a row */
 }
 
 .innerDiv.car {
     animation: slide 0.6s linear;
 }
+
 .innerDiv.log {
     animation: slide 1s linear;
 }
+
 .innerDiv.log.inverse {
     animation: slideNegative 1s linear;
 }
+
 .innerDiv {
     width: calc(100%) !important;
     position: relative;
@@ -38,39 +46,42 @@
     from {
         left: 0
     }
+
     to {
         left: calc(100%)
     }
 }
+
 @keyframes slideNegative {
     from {
         right: 0
     }
+
     to {
         right: calc(-100%)
     }
 }
 
-.ending-block{
+.ending-block {
     background-image: url("assets/labels/goal_label.png");
     background-size: contain;
     background-repeat: no-repeat;
 }
 
-.starting-block{
+.starting-block {
     background-image: url("assets/labels/start_label.png");
     background-size: contain;
     background-repeat: no-repeat;
 }
 
-.frog{
+.frog {
     background-image: url("assets/tiles/frog.png");
     background-size: contain !important;
     background-repeat: no-repeat;
     background-position: center;
 }
 
-.frog.log{
+.frog.log {
     background-image: url("assets/tiles/frog.png"), url("assets/obstacles/log.png");
 }
 
@@ -118,8 +129,8 @@
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
     transition: all .25s linear;
 }
 
@@ -133,10 +144,11 @@
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
     transition: all .25s linear;
 }
+
 /* Modal content box */
 .modal-content {
     background-color: #fefefe;
@@ -193,6 +205,7 @@ button.startGame {
     height: 166px;
     margin: 0 auto;
 }
+
 .happy-frog {
     width: 200px;
     height: 166px;

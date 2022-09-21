@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,42 +9,46 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Nabla&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Nabla&family=Press+Start+2P&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
     <!-- Welcome Modal -->
     <div id="welcomeModal" class="startmodal">
         <!-- Modal content -->
         <div class="modal-content">
-          <h1 class="modal-title">Welcome to </h1>
-          <h1 class="frogger-title">Frogger.Js</h1>
-          <p class="modal-text">A combination of classic Frogger and new Crossy Road in pure HTML, CSS, and Javascript.</p>
-          <p class="modal-text">To move your frog, use the respective arrow keys. Try to get to the goal before time runs out!</p>
-          <p class="modal-text">Avoid cars while crossing roads and use logs to safely traverse rivers.</p>
-          <p class="modal-text" style="margin-top: 50px;">Good luck!</p>
-          <button class="startGame" onclick="startGame()">Start Game</button>
+            <h1 class="modal-title">Welcome to </h1>
+            <h1 class="frogger-title">Frogger.Js</h1>
+            <p class="modal-text">A combination of classic Frogger and new Crossy Road in pure HTML, CSS, and
+                Javascript.</p>
+            <p class="modal-text">To move your frog, use the respective arrow keys. Try to get to the goal before time
+                runs out!</p>
+            <p class="modal-text">Avoid cars while crossing roads and use logs to safely traverse rivers.</p>
+            <p class="modal-text" style="margin-top: 50px;">Good luck!</p>
+            <button class="startGame" onclick="startGame()">Start Game</button>
         </div>
     </div>
 
     <div id="gameOverModal" class="endmodal">
         <!-- Modal content -->
         <div class="modal-content">
-          <h1 class="game-over-title">GAME OVER! </h1>
-          <img src="assets/modal/sadfrog.png" alt="Crying frog" class="sad-frog">
-          <p class="modal-text">The frog failed to make it to the end. Better luck next time!</p>
-          <p class="modal-text" style="margin-top: 50px;">Try Again?</p>
-          <button class="startGame" onclick="restartGame(1)">Restart Game</button>
+            <h1 class="game-over-title">GAME OVER! </h1>
+            <img src="assets/modal/sadfrog.png" alt="Crying frog" class="sad-frog">
+            <p class="modal-text">The frog failed to make it to the end. Better luck next time!</p>
+            <p class="modal-text" style="margin-top: 50px;">Try Again?</p>
+            <button class="startGame" onclick="restartGame(1)">Restart Game</button>
         </div>
     </div>
 
     <div id="gameWinModal" class="endmodal">
         <!-- Modal content -->
         <div class="modal-content">
-          <h1 class="game-win-title">YOU WIN! </h1>
-          <img src="assets/modal/happyFrog.png" alt="Happy frog" class="happy-frog">
-          <p class="modal-text">Congratulations! You successfully made it across the river and the road!</p>
-          <p class="modal-text" style="margin-top: 50px;">Want to play again?</p>
-          <button class="startGame" onclick=restartGame(2)>Restart Game</button>
+            <h1 class="game-win-title">YOU WIN! </h1>
+            <img src="assets/modal/happyFrog.png" alt="Happy frog" class="happy-frog">
+            <p class="modal-text">Congratulations! You successfully made it across the river and the road!</p>
+            <p class="modal-text" style="margin-top: 50px;">Want to play again?</p>
+            <button class="startGame" onclick=restartGame(2)>Restart Game</button>
         </div>
     </div>
 
@@ -371,7 +376,7 @@
             <div>
                 <div class="innerDiv"></div>
             </div>
-            <div  class="starting-block">
+            <div class="starting-block">
                 <div class="innerDiv"></div>
             </div>
             <div>
@@ -391,4 +396,5 @@
 
 </body>
 <script src='script.js'></script>
+
 </html>
