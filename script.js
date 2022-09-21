@@ -5,6 +5,7 @@ select all the rows - 10 rows - each row has 10 children (10 columns)
 const COLUMNS = 10;
 const ROWS = 10;
 
+let endSquare = document.getElementById("ending-block");
 let squares = document.querySelectorAll('.grid .row');
 let logsMovingLeft = document.querySelectorAll('.log-left');
 let logsMovingRight = document.querySelectorAll('.log-right');
@@ -15,29 +16,51 @@ let carsMovingRight = document.querySelectorAll(".car-right");
 let currentColumn = 6;
 let currentRow = 10;
 
+// Disables user input when win modal is visible
+let freezeUserInput = false;
+
 const gameOverSound = new Audio('assets/audio_dead.mp3');
 const moveSound = new Audio("assets/audio_move.mp3");
 
 //~~~~~~~~~~~~~~~~~~~MODAL HANDLING~~~~~~~~~~~~~~~~~~~
 //Get the modal objects
 var welcomeModal = document.getElementById("welcomeModal");
+var gameOverModal = document.getElementById("gameOverModal");
+var gameWinModal = document.getElementById("gameWinModal");
+
+//functions that checks if the div with element "endBlock" has the class "frog"
+function checkGameWin(){
+    if(endSquare.children[0].classList.contains("frog")){
+        freezeUserInput = true;
+        if (gameWinModal.style.opacity == "1") {
+            gameWinModal.style.opacity = "0";
+        }
+        gameWinModal.style.visibility = "visible";
+        gameWinModal.style.opacity = "1";
+    }
+}
 
 function startGame(){
-    if (welcomeModal.classList.contains('hidden')) {
-        welcomeModal.classList.remove('hidden');
-        setTimeout(function () {
-            welcomeModal.classList.remove('visually_hidden');
-        }, 20);
-      } else {
-        welcomeModal.classList.add('visually_hidden');    
-        welcomeModal.addEventListener('transitionend', function(e) {
-            welcomeModal.classList.add('hidden');
-        }, {
-          capture: false,
-          once: true,
-          passive: false
-        });
-      }
+    welcomeModal.style.opacity = "0";
+    welcomeModal.style.visibility = "hidden";
+    gameWinModal.style.visibility = "hidden";
+    gameOverModal.style.visibility = "hidden";
+    gameWinModal.style.opacity = "0";
+    gameOverModal.style.opacity = "0";
+}
+
+function restartGame(int) {
+    if (int == 1) {
+        gameOverModal.style.opacity = "0";
+        gameOverModal.style.visibility = "hidden";
+    } else if (int == 2) {
+        gameWinModal.style.opacity = "0";
+        gameWinModal.style.visibility = "hidden";
+        squares[currentRow-1].children[currentColumn-1].classList.remove('frog');
+        currentColumn = 6;
+        currentRow = 10;
+    }
+    freezeUserInput = false;
 }
 
 let board = [
@@ -180,36 +203,42 @@ function checkSpace(){
 }
 
 function moveFrog(e){
-    moveSound.play();
-    squares[currentRow-1].children[currentColumn-1].children[0].classList.remove('frog');
-    switch(e.key){
-        case 'ArrowLeft':
-            if(currentColumn != 1) {
-                console.log('ArrowLeft');
-                currentColumn -= 1;
-            }
-            break;
-        case 'ArrowRight':
-            if(currentColumn != 10) {
-                console.log('ArrowRight');
-                currentColumn += 1;
-            }
-            break;
-        case 'ArrowUp':
-            if(currentRow != 1) {
-                console.log('ArrowUp');
-                currentRow -= 1;
-            }
-            break;
-        case 'ArrowDown':
-            if(currentRow != 10) {
-                console.log('ArrowDown');
-                currentRow += 1;
-            }
-            break;  
+    if(!freezeUserInput){
+        moveSound.play();
+        squares[currentRow-1].children[currentColumn-1].children[0].classList.remove('frog');
+        switch(e.key){
+            case 'ArrowLeft':
+                if(currentColumn != 1) {
+                    console.log('ArrowLeft');
+                    currentColumn -= 1;
+                }
+                break;
+            case 'ArrowRight':
+                if(currentColumn != 10) {
+                    console.log('ArrowRight');
+                    currentColumn += 1;
+                }
+                break;
+            case 'ArrowUp':
+                if(currentRow != 1) {
+                    console.log('ArrowUp');
+                    currentRow -= 1;
+                }
+                break;
+            case 'ArrowDown':
+                if(currentRow != 10) {
+                    console.log('ArrowDown');
+                    currentRow += 1;
+                }
+                break;  
+        }
+        checkSpace();
+        squares[currentRow-1].children[currentColumn-1].children[0].classList.add('frog')
+        checkGameWin();
     }
-    checkSpace();
-    squares[currentRow-1].children[currentColumn-1].children[0].classList.add('frog')
+    
+        
+    
 }
 
 document.addEventListener('keydown', moveFrog)
@@ -312,8 +341,6 @@ function removeClass(rowDiv, columnNum, className){
     else
         rowDiv.children[(columnNum + COLUMNS) % COLUMNS].children[0].classList.remove(className);
 }
-
-
 
 /*
 We want to keep the logs and cars moving continously, 
