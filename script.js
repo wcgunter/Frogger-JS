@@ -201,6 +201,9 @@ function moveFrog(e) {
     if (!freezeUserInput) {
         moveSound.play();
         squares[currentRow - 1].children[currentColumn - 1].children[0].classList.remove('frog');
+        
+        let toggleFlip = squares[currentRow - 1].children[currentColumn - 1].children[0].classList.contains('flip');
+        
         switch (e.key) {
             case 'ArrowLeft':
                 if (currentColumn != 1) {
@@ -218,15 +221,22 @@ function moveFrog(e) {
                 if (currentRow != 1) {
                     console.log('ArrowUp');
                     currentRow -= 1;
+                    toggleFlip = false;
                 }
                 break;
             case 'ArrowDown':
                 if (currentRow != 10) {
                     console.log('ArrowDown');
                     currentRow += 1;
+                    toggleFlip = true;
                 }
                 break;
         }
+        if(toggleFlip)
+            squares[currentRow - 1].children[currentColumn - 1].children[0].classList.add('flip');
+        else
+            squares[currentRow - 1].children[currentColumn - 1].children[0].classList.remove('flip');
+
         squares[currentRow - 1].children[currentColumn - 1].children[0].classList.add('frog');
         checkSpace();
         checkGameWin();

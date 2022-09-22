@@ -78,11 +78,16 @@
 }
 
 .frog {
-    background-image: url("assets/tiles/frog.png");
+    background-image: url("assets/tiles/frog.gif");
+    transform: scaleY(-1);
+}
+
+.frog.flip {
+    transform: scaleY(1);
 }
 
 .frog.log {
-    background-image: url("assets/tiles/frog.png"), url("assets/obstacles/log.png");
+    background-image: url("assets/tiles/frog.gif"), url("assets/obstacles/log.png");
 }
 
 .left {
