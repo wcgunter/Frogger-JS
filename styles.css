@@ -62,23 +62,23 @@
     }
 }
 
-.ending-block {
-    background-image: url("assets/labels/goal_label.png");
+.ending-block, .starting-block,
+.car, .frog, .log {
     background-size: contain;
     background-repeat: no-repeat;
+    background-position: center;
+}
+
+.ending-block {
+    background-image: url("assets/labels/goal_label.png");
 }
 
 .starting-block {
     background-image: url("assets/labels/start_label.png");
-    background-size: contain;
-    background-repeat: no-repeat;
 }
 
 .frog {
     background-image: url("assets/tiles/frog.png");
-    background-size: contain !important;
-    background-repeat: no-repeat;
-    background-position: center;
 }
 
 .frog.log {
@@ -91,17 +91,10 @@
 
 .car {
     background-image: url("assets/obstacles/car.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    /* object-fit: contain; */
-
 }
 
 .log {
     background-image: url("assets/obstacles/log.png");
-    background-size: contain;
-    /* background-size: cover; */
-    background-repeat: no-repeat;
 }
 
 .road {

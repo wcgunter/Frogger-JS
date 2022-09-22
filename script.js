@@ -136,24 +136,24 @@ function checkSpace() {
     if (direction > 0) {
         let prevSpot = squares[currentRow - 1].children[(currentColumn - 2 + COLUMNS) % COLUMNS].children[0];
 
-        if ((prevSpot.classList.contains('car') && prevSpot.offsetLeft - prevSpot.parentElement.offsetLeft >= prevSpot.offsetWidth / 2)
-            || (currentSpot.classList.contains('car') && currentSpot.offsetLeft - currentSpot.parentElement.offsetLeft <= currentSpot.offsetWidth / 2)) {
+        if ((prevSpot.classList.contains('car') && prevSpot.offsetLeft % prevSpot.parentElement.offsetLeft >= prevSpot.offsetWidth / 2)
+            || (currentSpot.classList.contains('car') && currentSpot.offsetLeft % currentSpot.parentElement.offsetLeft <= currentSpot.offsetWidth / 2)) {
 
-            currentSpot.style.left = `${currentSpot.offsetLeft - currentSpot.parentElement.offsetLeft}px`
-            prevSpot.style.left = `${prevSpot.offsetLeft - prevSpot.parentElement.offsetLeft}px`
+            currentSpot.style.left = `${currentSpot.offsetLeft % currentSpot.parentElement.offsetLeft}px`
+            prevSpot.style.left = `${prevSpot.offsetLeft % prevSpot.parentElement.offsetLeft}px`
 
             console.log("DEAD");
             clearInterval(logInterval)
             clearInterval(carInterval)
         }
-        if (squares[currentRow - 1].classList.contains('river') && !currentSpot.classList.contains('frog')) {
+        if (squares[currentRow - 1].classList.contains('river') && !(currentSpot.classList.contains('frog') && currentSpot.classList.contains('log'))) {
             // previous spot has a log and the offset is greater than half of the width then safe
             // next spot has a log and the offset is less than half of the width then safe
-            if (!((prevSpot.classList.contains('log') && (prevSpot.offsetLeft - prevSpot.parentElement.offsetLeft) >= prevSpot.offsetWidth / 2)
-                || (currentSpot.classList.contains('log') && (currentSpot.offsetLeft - currentSpot.parentElement.offsetLeft) <= currentSpot.offsetWidth / 2))) {
+            if (!((prevSpot.classList.contains('log') && (prevSpot.offsetLeft % prevSpot.parentElement.offsetLeft) >= prevSpot.offsetWidth / 2)
+                || (currentSpot.classList.contains('log') && (currentSpot.offsetLeft % currentSpot.parentElement.offsetLeft) <= currentSpot.offsetWidth / 2))) {
 
-                currentSpot.style.left = `${currentSpot.offsetLeft - currentSpot.parentElement.offsetLeft}px`
-                prevSpot.style.left = `${prevSpot.offsetLeft - prevSpot.parentElement.offsetLeft}px`
+                currentSpot.style.left = `${currentSpot.offsetLeft % currentSpot.parentElement.offsetLeft}px`
+                prevSpot.style.left = `${prevSpot.offsetLeft % prevSpot.parentElement.offsetLeft}px`
 
                 console.log("DEAD");
                 clearInterval(logInterval)
@@ -164,35 +164,29 @@ function checkSpace() {
 
         let nextSpot = squares[currentRow - 1].children[(currentColumn + COLUMNS) % COLUMNS].children[0];
 
-        let currentLeft = currentSpot.offsetLeft// > currentSpot.offsetWidth ? currentSpot.offsetLeft % currentSpot.offsetWidth : currentSpot.offsetLeft;
-        let currentParentLeft = currentSpot.parentElement.offsetLeft// > currentSpot.parentElement.offsetWidth ? currentSpot.parentElement.offsetLeft % currentSpot.parentElement.offsetWidth : currentSpot.parentElement.offsetLeft;
+        let currentLeft = currentSpot.offsetLeft;
+        let currentParentLeft = currentSpot.parentElement.offsetLeft;
+        let nextLeft = nextSpot.offsetLeft;
+        let nextParentLeft = nextSpot.parentElement.offsetLeft;
 
-        let nextLeft = nextSpot.offsetLeft //> nextSpot.offsetWidth ? nextSpot.offsetLeft % nextSpot.offsetWidth : nextSpot.offsetLeft;
-        let nextParentLeft = nextSpot.parentElement.offsetLeft //> nextSpot.parentElement.offsetWidth ? nextSpot.parentElement.offsetLeft % nextSpot.parentElement.offsetWidth : nextSpot.parentElement.offsetLeft;
+        if ((nextSpot.classList.contains('car') && nextLeft % nextParentLeft >= nextSpot.offsetWidth / 2)
+            || (currentSpot.classList.contains('car') && currentLeft % currentParentLeft <= currentSpot.offsetWidth / 2)) {
 
-        if ((nextSpot.classList.contains('car') && nextLeft - nextParentLeft <= nextSpot.offsetWidth / 2)
-            || (currentSpot.classList.contains('car') && currentLeft - currentParentLeft >= currentSpot.offsetWidth / 2)) {
-
-            currentSpot.style.left = `${currentSpot.offsetLeft - currentSpot.parentElement.offsetLeft}px`
-            nextSpot.style.left = `${nextSpot.offsetLeft - nextSpot.parentElement.offsetLeft}px`
+            currentSpot.style.left = `${currentSpot.offsetLeft % currentSpot.parentElement.offsetLeft}px`
+            nextSpot.style.left = `${nextSpot.offsetLeft % nextSpot.parentElement.offsetLeft}px`
 
             console.log("DEAD");
             clearInterval(logInterval)
             clearInterval(carInterval)
         }
-        if (squares[currentRow - 1].classList.contains('river') && !currentSpot.classList.contains('frog')) {
-            // console.log((currentSpot.offsetLeft - currentSpot.parentElement.offsetLeft));
-            // console.log((nextSpot.offsetLeft - nextSpot.parentElement.offsetLeft));
-            // console.log(`${nextSpot.offsetLeft} - ${currentSpot.offsetLeft}   `);
-            // console.log(`${nextSpot.parentElement.offsetLeft} - ${currentSpot.parentElement.offsetLeft}   `);
-
+        if (squares[currentRow - 1].classList.contains('river') && !(currentSpot.classList.contains('frog') && currentSpot.classList.contains('log'))) {
             // previous spot has a log and the offset is greater than half of the width then safe
             // next spot has a log and the offset is less than half of the width then safe
-            if (!((nextSpot.classList.contains('log') && (nextLeft - nextParentLeft) <= nextSpot.offsetWidth / 2)
-                || (currentSpot.classList.contains('log') && (currentLeft - currentParentLeft) >= currentSpot.offsetWidth / 2))) {
+            if (!((nextSpot.classList.contains('log') && (nextLeft % nextParentLeft) >= nextSpot.offsetWidth / 2)
+                || (currentSpot.classList.contains('log') && (currentLeft % currentParentLeft) <= currentSpot.offsetWidth / 2))) {
 
-                currentSpot.style.left = `${currentSpot.offsetLeft - currentSpot.parentElement.offsetLeft}px`
-                nextSpot.style.left = `${nextSpot.offsetLeft - nextSpot.parentElement.offsetLeft}px`
+                currentSpot.style.left = `${currentSpot.offsetLeft % currentSpot.parentElement.offsetLeft}px`
+                nextSpot.style.left = `${nextSpot.offsetLeft % nextSpot.parentElement.offsetLeft}px`
 
                 console.log("DEAD");
                 clearInterval(logInterval)
@@ -233,13 +227,10 @@ function moveFrog(e) {
                 }
                 break;
         }
+        squares[currentRow - 1].children[currentColumn - 1].children[0].classList.add('frog');
         checkSpace();
-        squares[currentRow - 1].children[currentColumn - 1].children[0].classList.add('frog')
         checkGameWin();
     }
-
-
-
 }
 
 document.addEventListener('keydown', moveFrog)
@@ -253,6 +244,8 @@ function moveCars() {
 function moveLogs() {
     moveObjects('river');
 }
+
+
 // move all objects that are in the environment specified
 // this function works by removing the class of the object type (e.g. car, log)
 // increases the column number of the object (or decreases if moving left)
@@ -263,20 +256,16 @@ function moveObjects(environment) {
     //Cannot go inside of the main for loop since it would be called for each log tile on the screen.
     if (environment == "river") {
         let frogLogSpace = document.getElementsByClassName("frog log");
-
         //If there is a div that has both the frog and log classes
         if (frogLogSpace.length != 0) {
-
             squares[currentRow - 1].children[currentColumn - 1].children[0].classList.remove('frog');
 
-            if (board[currentRow - 1].objects[0].direction < 0 && currentColumn != 1) {
+            if (board[currentRow - 1].direction < 0 && currentColumn != 1)
                 currentColumn -= 1;
-            } else if (board[currentRow - 1].objects[0].direction > 0 && currentColumn != 10) {
+            if (board[currentRow - 1].direction > 0 && currentColumn != 10)
                 currentColumn += 1;
-            }
 
             squares[currentRow - 1].children[currentColumn - 1].children[0].classList.add('frog');
-
         }
     }
 
@@ -335,7 +324,6 @@ function addClass(rowDiv, columnNum, className) {
     else
         rowDiv.children[(columnNum + COLUMNS) % COLUMNS].children[0].classList.add(className);
 }
-
 function removeClass(rowDiv, columnNum, className) {
     if (className == 'left')
         rowDiv.children[(columnNum + COLUMNS) % COLUMNS].classList.remove(className);
