@@ -1,13 +1,22 @@
 /* 
 Game constants and variables
 select all the rows - 10 rows - each row has 10 children (10 columns)
+create the game sounds for use later
+get all of the modals for use later
 */
 const COLUMNS = 10;
 const ROWS = 10;
+const gameOverSound = new Audio('assets/audio_dead.mp3');
+const moveSound = new Audio("assets/audio_move.mp3");
+var welcomeModal = document.getElementById("welcomeModal");
+var gameOverModal = document.getElementById("gameOverModal");
+var gameWinModal = document.getElementById("gameWinModal");
 
+//used to move the objects on the roads and rivers -> defined at bottom of script
 let carInterval;
 let logInterval;
 
+//gets collection(s) of squares (ex: logs moving left, logs moving right, all squares, ending square, etc).
 let endSquare = document.getElementById("ending-block");
 let squares = document.querySelectorAll('.grid .row');
 let logsMovingLeft = document.querySelectorAll('.log-left');
@@ -22,16 +31,8 @@ let currentRow = 10;
 // Disables user input when win modal is visible
 let freezeUserInput = true;
 
-const gameOverSound = new Audio('assets/audio_dead.mp3');
-const moveSound = new Audio("assets/audio_move.mp3");
-
-//~~~~~~~~~~~~~~~~~~~MODAL HANDLING~~~~~~~~~~~~~~~~~~~
-//Get the modal objects
-var welcomeModal = document.getElementById("welcomeModal");
-var gameOverModal = document.getElementById("gameOverModal");
-var gameWinModal = document.getElementById("gameWinModal");
-
 //functions that checks if the div with element "endBlock" has the class "frog"
+//gets called every time the frog moves
 function checkGameWin() {
     if (endSquare.children[0].classList.contains("frog")) {
         freezeUserInput = true;
@@ -40,12 +41,12 @@ function checkGameWin() {
         }
         gameWinModal.style.visibility = "visible";
         gameWinModal.style.opacity = "1";
-
         clearInterval(logInterval);
         clearInterval(carInterval);
     }
 }
 
+//gets called by the collision detection function when the frog hits an object / lands in river
 function gameLoss() {
     gameOverModal.style.visibility = "visible";
     gameOverModal.style.opacity = "1";
@@ -55,6 +56,7 @@ function gameLoss() {
     clearInterval(carInterval);
 }
 
+//gets called by the start game button in the welcome modal
 function startGame() {
     welcomeModal.style.opacity = "0";
     welcomeModal.style.visibility = "hidden";
@@ -65,6 +67,9 @@ function startGame() {
     freezeUserInput = false;
 }
 
+//gets called by the reset game button in game over / game win modals
+//when 1 is passed in, the user just lost the game
+//when 2 is passed in, the user just won the game
 function restartGame(int) {
     let currentSpot = squares[currentRow - 1].children[currentColumn - 1].children[0];
     if (int == 1) {
@@ -84,6 +89,7 @@ function restartGame(int) {
     carInterval = setInterval(moveCars, 600);
 }
 
+//creates board object which contains all cells of the game
 let board = [
     {
         row: 0,
@@ -149,6 +155,7 @@ for (let i = 0; i < squares.length; i++) {
     squares[i].classList.add(board[i].environment);
 }
 
+//collision detection function that checks spaces around the frog to see if it is dead or not
 function checkSpace() {
     let currentSpot = squares[currentRow - 1].children[currentColumn - 1].children[0];
     let direction = board[currentRow - 1].direction ? board[currentRow - 1].direction : 1;
@@ -208,13 +215,14 @@ function checkSpace() {
 
 }
 
+//function that watches for user input and moves the frog (if user input is not frozen)
 function moveFrog(e) {
     if (!freezeUserInput) {
         moveSound.play();
         squares[currentRow - 1].children[currentColumn - 1].children[0].classList.remove('frog');
-        
+
         let toggleFlip = squares[currentRow - 1].children[currentColumn - 1].children[0].classList.contains('flip');
-        
+
         switch (e.key) {
             case 'ArrowLeft':
                 if (currentColumn != 1) {
@@ -243,7 +251,7 @@ function moveFrog(e) {
                 }
                 break;
         }
-        if(toggleFlip)
+        if (toggleFlip)
             squares[currentRow - 1].children[currentColumn - 1].children[0].classList.add('flip');
         else
             squares[currentRow - 1].children[currentColumn - 1].children[0].classList.remove('flip');
@@ -253,7 +261,7 @@ function moveFrog(e) {
         checkGameWin();
     }
 }
-
+//listener that calls the moveFrog function when user presses a key
 document.addEventListener('keydown', moveFrog)
 
 // calls moveObjects with road to move all objects on the roads
