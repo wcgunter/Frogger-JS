@@ -40,6 +40,15 @@ function checkGameWin() {
     }
 }
 
+function gameLoss() {
+    gameOverModal.style.visibility = "visible";
+    gameOverModal.style.opacity = "1";
+    freezeUserInput = true;
+    console.log("DEAD");
+    clearInterval(logInterval);
+    clearInterval(carInterval);
+}
+
 function startGame() {
     welcomeModal.style.opacity = "0";
     welcomeModal.style.visibility = "hidden";
@@ -51,17 +60,22 @@ function startGame() {
 }
 
 function restartGame(int) {
+    let currentSpot = squares[currentRow - 1].children[currentColumn - 1].children[0];
     if (int == 1) {
         gameOverModal.style.opacity = "0";
         gameOverModal.style.visibility = "hidden";
+        currentSpot.classList.remove('frog');
+
     } else if (int == 2) {
         gameWinModal.style.opacity = "0";
         gameWinModal.style.visibility = "hidden";
-        squares[currentRow - 1].children[currentColumn - 1].classList.remove('frog');
-        currentColumn = 6;
-        currentRow = 10;
+        endSquare.children[0].classList.remove("frog")
     }
+    currentColumn = 6;
+    currentRow = 10;
     freezeUserInput = false;
+    setInterval(moveLogs, 1000);
+    setInterval(moveCars, 600);
 }
 
 let board = [
@@ -141,10 +155,7 @@ function checkSpace() {
 
             currentSpot.style.left = `${currentSpot.offsetLeft % currentSpot.parentElement.offsetLeft}px`
             prevSpot.style.left = `${prevSpot.offsetLeft % prevSpot.parentElement.offsetLeft}px`
-
-            console.log("DEAD");
-            clearInterval(logInterval)
-            clearInterval(carInterval)
+            gameLoss();
         }
         if (squares[currentRow - 1].classList.contains('river') && !(currentSpot.classList.contains('frog') && currentSpot.classList.contains('log'))) {
             // previous spot has a log and the offset is greater than half of the width then safe
@@ -155,9 +166,7 @@ function checkSpace() {
                 currentSpot.style.left = `${currentSpot.offsetLeft % currentSpot.parentElement.offsetLeft}px`
                 prevSpot.style.left = `${prevSpot.offsetLeft % prevSpot.parentElement.offsetLeft}px`
 
-                console.log("DEAD");
-                clearInterval(logInterval)
-                clearInterval(carInterval)
+                gameLoss();
             }
         }
     } else {
@@ -175,9 +184,7 @@ function checkSpace() {
             currentSpot.style.left = `${currentSpot.offsetLeft % currentSpot.parentElement.offsetLeft}px`
             nextSpot.style.left = `${nextSpot.offsetLeft % nextSpot.parentElement.offsetLeft}px`
 
-            console.log("DEAD");
-            clearInterval(logInterval)
-            clearInterval(carInterval)
+            gameLoss();
         }
         if (squares[currentRow - 1].classList.contains('river') && !(currentSpot.classList.contains('frog') && currentSpot.classList.contains('log'))) {
             // previous spot has a log and the offset is greater than half of the width then safe
@@ -188,9 +195,7 @@ function checkSpace() {
                 currentSpot.style.left = `${currentSpot.offsetLeft % currentSpot.parentElement.offsetLeft}px`
                 nextSpot.style.left = `${nextSpot.offsetLeft % nextSpot.parentElement.offsetLeft}px`
 
-                console.log("DEAD");
-                clearInterval(logInterval)
-                clearInterval(carInterval)
+                gameLoss();
             }
         }
     }
