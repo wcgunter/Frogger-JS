@@ -5,6 +5,9 @@ select all the rows - 10 rows - each row has 10 children (10 columns)
 const COLUMNS = 10;
 const ROWS = 10;
 
+let carInterval;
+let logInterval;
+
 let endSquare = document.getElementById("ending-block");
 let squares = document.querySelectorAll('.grid .row');
 let logsMovingLeft = document.querySelectorAll('.log-left');
@@ -37,6 +40,9 @@ function checkGameWin() {
         }
         gameWinModal.style.visibility = "visible";
         gameWinModal.style.opacity = "1";
+
+        clearInterval(logInterval);
+        clearInterval(carInterval);
     }
 }
 
@@ -74,8 +80,8 @@ function restartGame(int) {
     currentColumn = 6;
     currentRow = 10;
     freezeUserInput = false;
-    setInterval(moveLogs, 1000);
-    setInterval(moveCars, 600);
+    logInterval = setInterval(moveLogs, 1000);
+    carInterval = setInterval(moveCars, 600);
 }
 
 let board = [
@@ -351,5 +357,5 @@ We want to keep the logs and cars moving continously,
 to do that we use setInterval(), which calls moveLogs 
 function every 1 second or 1000ms and moveCars every 600ms.
 */
-const logInterval = setInterval(moveLogs, 1000);
-const carInterval = setInterval(moveCars, 600);
+logInterval = setInterval(moveLogs, 1000);
+carInterval = setInterval(moveCars, 600);
