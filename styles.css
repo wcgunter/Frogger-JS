@@ -62,8 +62,11 @@
     }
 }
 
-.ending-block, .starting-block,
-.car, .frog, .log {
+.ending-block,
+.starting-block,
+.car,
+.frog,
+.log {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
