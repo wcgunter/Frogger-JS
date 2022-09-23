@@ -2,7 +2,7 @@
 Game constants and variables
 select all the rows - 10 rows - each row has 10 children (10 columns)
 */
-const COLUMNS = 10;
+const COLUMNS = 12;
 const ROWS = 10;
 
 let carInterval;
@@ -16,7 +16,7 @@ let carsMovingLeft = document.querySelectorAll(".car-left");
 let carsMovingRight = document.querySelectorAll(".car-right");
 
 // frog start position
-let currentColumn = 6;
+let currentColumn = 7;
 let currentRow = 10;
 
 // Disables user input when win modal is visible
@@ -77,11 +77,12 @@ function restartGame(int) {
         gameWinModal.style.visibility = "hidden";
         endSquare.children[0].classList.remove("frog")
     }
-    currentColumn = 6;
+    currentColumn = 7;
     currentRow = 10;
     freezeUserInput = false;
     logInterval = setInterval(moveLogs, 1000);
     carInterval = setInterval(moveCars, 600);
+    squares[currentRow - 1].children[currentColumn - 1].children[0].classList.add('frog');
 }
 
 let board = [
@@ -159,9 +160,16 @@ function checkSpace() {
         if ((prevSpot.classList.contains('car') && prevSpot.offsetLeft % prevSpot.parentElement.offsetLeft >= prevSpot.offsetWidth / 2)
             || (currentSpot.classList.contains('car') && currentSpot.offsetLeft % currentSpot.parentElement.offsetLeft <= currentSpot.offsetWidth / 2)) {
 
+            // set the offest to show the user exactly where the car was when it hit them
             currentSpot.style.left = `${currentSpot.offsetLeft % currentSpot.parentElement.offsetLeft}px`
             prevSpot.style.left = `${prevSpot.offsetLeft % prevSpot.parentElement.offsetLeft}px`
+            
+            // TODO: ADD SPLAT IMAGE/ANIMATION AND PAUSE BEFORE GAME LOSS MODAL 
             gameLoss();
+
+            // reset offset 
+            currentSpot.style.left = null;
+            prevSpot.style.left = null;
         }
         if (squares[currentRow - 1].classList.contains('river') && !(currentSpot.classList.contains('frog') && currentSpot.classList.contains('log'))) {
             // previous spot has a log and the offset is greater than half of the width then safe
@@ -169,10 +177,16 @@ function checkSpace() {
             if (!((prevSpot.classList.contains('log') && (prevSpot.offsetLeft % prevSpot.parentElement.offsetLeft) >= prevSpot.offsetWidth / 2)
                 || (currentSpot.classList.contains('log') && (currentSpot.offsetLeft % currentSpot.parentElement.offsetLeft) <= currentSpot.offsetWidth / 2))) {
 
+                // set offset to show user where the log was when they missed it
                 currentSpot.style.left = `${currentSpot.offsetLeft % currentSpot.parentElement.offsetLeft}px`
                 prevSpot.style.left = `${prevSpot.offsetLeft % prevSpot.parentElement.offsetLeft}px`
 
+                // TODO: ADD SPLASH IMAGE/ANIMATION AND PAUSE BEFORE GAME LOSS MODAL
                 gameLoss();
+
+                // reset offset
+                currentSpot.style.left = null;
+                prevSpot.style.left = null;
             }
         }
     } else {
@@ -191,6 +205,9 @@ function checkSpace() {
             nextSpot.style.left = `${nextSpot.offsetLeft % nextSpot.parentElement.offsetLeft}px`
 
             gameLoss();
+
+            currentSpot.style.left = null;
+            nextSpot.style.left = null;
         }
         if (squares[currentRow - 1].classList.contains('river') && !(currentSpot.classList.contains('frog') && currentSpot.classList.contains('log'))) {
             // previous spot has a log and the offset is greater than half of the width then safe
@@ -202,6 +219,10 @@ function checkSpace() {
                 nextSpot.style.left = `${nextSpot.offsetLeft % nextSpot.parentElement.offsetLeft}px`
 
                 gameLoss();
+
+                currentSpot.style.left = null;
+                nextSpot.style.left = null;
+
             }
         }
     }
@@ -217,13 +238,13 @@ function moveFrog(e) {
         
         switch (e.key) {
             case 'ArrowLeft':
-                if (currentColumn != 1) {
+                if (currentColumn != 2) {
                     console.log('ArrowLeft');
                     currentColumn -= 1;
                 }
                 break;
             case 'ArrowRight':
-                if (currentColumn != 10) {
+                if (currentColumn != 11) {
                     console.log('ArrowRight');
                     currentColumn += 1;
                 }
@@ -281,10 +302,11 @@ function moveObjects(environment) {
         if (frogLogSpace.length != 0) {
             squares[currentRow - 1].children[currentColumn - 1].children[0].classList.remove('frog');
 
-            if (board[currentRow - 1].direction < 0 && currentColumn != 1)
-                currentColumn -= 1;
-            if (board[currentRow - 1].direction > 0 && currentColumn != 10)
-                currentColumn += 1;
+            currentColumn += 1*board[currentRow - 1].direction;
+            
+            if(currentColumn == 1 || currentColumn == 12){
+                gameLoss();
+            }
 
             squares[currentRow - 1].children[currentColumn - 1].children[0].classList.add('frog');
         }
@@ -359,3 +381,5 @@ function every 1 second or 1000ms and moveCars every 600ms.
 */
 logInterval = setInterval(moveLogs, 1000);
 carInterval = setInterval(moveCars, 600);
+
+setInterval(checkSpace, 100);
