@@ -94,7 +94,7 @@ function restartGame(int) {
 let board = [
     {
         row: 0,
-        environment: 'grass',
+        environment: 'grass-bottom',
         objects: []
     },
     {
@@ -120,12 +120,12 @@ let board = [
     },
     {
         row: 4,
-        environment: 'grass',
+        environment: 'grass-middle',
         objects: []
     },
     {
         row: 5,
-        environment: 'road',
+        environment: 'road-top',
         direction: 1,
         objects: [{ column: 3, direction: 1, type: 'car', image: "url" }, { column: 7, direction: 1, type: 'car', image: "url" }]
     },
@@ -137,18 +137,18 @@ let board = [
     },
     {
         row: 7,
-        environment: 'road',
+        environment: 'road-bottom',
         direction: 1,
         objects: [{ column: 0, direction: 1, type: 'car', image: "url" }, { column: 4, direction: 1, type: 'car', image: "url" }]
     },
     {
         row: 8,
-        environment: 'grass',
+        environment: 'grass-top',
         objects: []
     },
     {
         row: 9,
-        environment: 'grass',
+        environment: 'grass-bottom',
         objects: []
     }];
 
@@ -288,6 +288,8 @@ document.addEventListener('keydown', moveFrog)
 // calls moveObjects with road to move all objects on the roads
 function moveCars() {
     moveObjects('road');
+    moveObjects('road-top');
+    moveObjects('road-bottom');
 }
 
 // calls moveObjects with river to move all objects on the rivers

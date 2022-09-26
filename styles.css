@@ -105,9 +105,21 @@
     background-image: url("assets/obstacles/log.png");
 }
 
+.road-top {
+    background-color: grey;
+    background-image: url("assets/tiles/road/road_barrier_top.png");
+    background-size: contain;
+}
+
 .road {
     background-color: grey;
-    background-image: url("assets/tiles/stone.jpg");
+    background-image: url("assets/tiles/road/dashed_line.png");
+    background-size: contain;
+}
+
+.road-bottom {
+    background-color: grey;
+    background-image: url("assets/tiles/road/road_barrier_bottom.png");
     background-size: contain;
 }
 
@@ -117,9 +129,27 @@
 }
 
 .grass {
-    background-image: url("assets/tiles/grass.jpg");
+    background-image: url("assets/tiles/grass/grass_base.gif");
     background-color: lightgreen;
-    background-size: calc(10%);
+    background-size: contain;
+}
+
+.grass-top {
+    background-image: url("assets/tiles/grass/grass_border_top.gif");
+    background-color: lightgreen;
+    background-size: contain;
+}
+
+.grass-bottom {
+    background-image: url("assets/tiles/grass/grass_border_bottom.gif");
+    background-color: lightgreen;
+    background-size: contain;
+}
+
+.grass-middle {
+    background-image: url("assets/tiles/grass/grass_short.png");
+    background-color: lightgreen;
+    background-size: contain;
 }
 
 /* Modal background box */
