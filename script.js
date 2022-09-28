@@ -11,6 +11,7 @@ const moveSound = new Audio("assets/audio_move.mp3");
 var welcomeModal = document.getElementById("welcomeModal");
 var gameOverModal = document.getElementById("gameOverModal");
 var gameWinModal = document.getElementById("gameWinModal");
+var scoreOutput = document.getElementById('scoreOutput');
 
 //used to move the objects on the roads and rivers -> defined at bottom of script
 let carInterval;
@@ -42,6 +43,7 @@ function checkGameWin() {
         if (gameWinModal.style.opacity == "1") {
             gameWinModal.style.opacity = "0";
         }
+        scoreOutput.textContent = "Score: " + userScore + " points";
         gameWinModal.style.visibility = "visible";
         gameWinModal.style.opacity = "1";
         clearInterval(logInterval);
@@ -72,6 +74,7 @@ function startGame() {
     freezeUserInput = false;
     resetScore();
     scoreInterval = setInterval(changeScore, 1000);
+    squares[currentRow - 1].children[currentColumn - 1].children[0].classList.add('frog');
 }
 function resetScore(){
     userScore = 100
@@ -80,6 +83,9 @@ function resetScore(){
 
 function changeScore(){
     userScore -= 1;
+    if (userScore <= 0){
+        gameLoss();
+    }
     document.getElementById('scoreBlock').textContent = 'Score: ' + userScore
 }
 
