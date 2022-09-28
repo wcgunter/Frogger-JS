@@ -15,6 +15,7 @@ var gameWinModal = document.getElementById("gameWinModal");
 //used to move the objects on the roads and rivers -> defined at bottom of script
 let carInterval;
 let logInterval;
+let scoreInterval;
 
 //gets collection(s) of squares (ex: logs moving left, logs moving right, all squares, ending square, etc).
 let endSquare = document.getElementById("ending-block");
@@ -23,6 +24,8 @@ let logsMovingLeft = document.querySelectorAll('.log-left');
 let logsMovingRight = document.querySelectorAll('.log-right');
 let carsMovingLeft = document.querySelectorAll(".car-left");
 let carsMovingRight = document.querySelectorAll(".car-right");
+let userScore = 100
+document.getElementById('scoreBlock').textContent = 'Score: ' + userScore
 
 // frog start position
 let currentColumn = 7;
@@ -43,6 +46,7 @@ function checkGameWin() {
         gameWinModal.style.opacity = "1";
         clearInterval(logInterval);
         clearInterval(carInterval);
+        clearInterval(scoreInterval);
     }
 }
 
@@ -54,6 +58,7 @@ function gameLoss() {
     console.log("DEAD");
     clearInterval(logInterval);
     clearInterval(carInterval);
+    clearInterval(scoreInterval);
 }
 
 //gets called by the start game button in the welcome modal
@@ -65,6 +70,17 @@ function startGame() {
     gameWinModal.style.opacity = "0";
     gameOverModal.style.opacity = "0";
     freezeUserInput = false;
+    resetScore();
+    scoreInterval = setInterval(changeScore, 1000);
+}
+function resetScore(){
+    userScore = 100
+    document.getElementById('scoreBlock').textContent = 'Score: ' + userScore
+}
+
+function changeScore(){
+    userScore -= 1;
+    document.getElementById('scoreBlock').textContent = 'Score: ' + userScore
 }
 
 //gets called by the reset game button in game over / game win modals
@@ -84,9 +100,11 @@ function restartGame(int) {
     }
     currentColumn = 7;
     currentRow = 10;
+    resetScore()
     freezeUserInput = false;
     logInterval = setInterval(moveLogs, 1000);
     carInterval = setInterval(moveCars, 600);
+    scoreInterval = setInterval(changeScore, 1000);
     squares[currentRow - 1].children[currentColumn - 1].children[0].classList.add('frog');
 }
 
@@ -391,5 +409,7 @@ function every 1 second or 1000ms and moveCars every 600ms.
 */
 logInterval = setInterval(moveLogs, 1000);
 carInterval = setInterval(moveCars, 600);
+
+
 
 setInterval(checkSpace, 100);
