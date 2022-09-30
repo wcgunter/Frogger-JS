@@ -73,11 +73,11 @@
 }
 
 .ending-block {
-    background-image: url("assets/labels/goal_label.png");
+    background-image: url("assets/flags/green_flag.gif");
 }
 
 .starting-block {
-    background-image: url("assets/labels/start_label.png");
+    background-image: url("assets/flags/red_flag.gif");
 }
 
 .frog {
