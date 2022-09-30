@@ -73,11 +73,11 @@
 }
 
 .ending-block {
-    background-image: url("assets/flags/green_flag.gif");
+    background-image: url("assets/flags/red_flag.gif");
 }
 
 .starting-block {
-    background-image: url("assets/flags/red_flag.gif");
+    background-image: url("assets/flags/green_flag.gif");
 }
 
 .frog {
